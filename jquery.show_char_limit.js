@@ -79,10 +79,8 @@
         val = val.replace(/^\s+/, '')
         val = val.replace(/\s+$/, '')
       }
-      var currLen = val.length
-      if (options.newline_cost !== 1 && /[\n\r]/.test(val)) {
-        currLen += (/[\n\r]/g.exec(val).length * (options.newline_cost - 1));
-      }
+      if (options.newline_cost > 1)
+				currLen += (val.match(/^/mg).length - 1) * (options.newline_cost - 1);
 
       var maxLen = calcMaxLength($this, options['maxlength']);
       var charsLeft = maxLen - currLen;
